@@ -56,11 +56,10 @@ module GELF
 
     def silence_logger
       if self.respond_to?(:silence) && self.method(:silence).arity == 0
-           self.silence { yield }
-        else
-          yield
-        end
-      end
+         self.silence { yield }
+      else
+        yield
+      end      
     end
   end
 
