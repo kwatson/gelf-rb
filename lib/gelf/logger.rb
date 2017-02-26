@@ -53,6 +53,15 @@ module GELF
     def <<(message)
       notify_with_level(GELF::UNKNOWN, 'short_message' => message)
     end
+
+    def silence_logger
+      if self.respond_to?(:silence) && self.method(:silence).arity == 0
+           self.silence { yield }
+        else
+          yield
+        end
+      end
+    end
   end
 
   # Graylog2 notifier, compatible with Ruby Logger.
